@@ -10,6 +10,7 @@ import life.majiang.community.mapper.NotificationMapper;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.Notification;
 import life.majiang.community.model.NotificationExample;
+import life.majiang.community.model.Tourist;
 import life.majiang.community.model.User;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
@@ -80,20 +81,12 @@ public class NotificationService {
         return paginationDTO;
     }
 
-    public Long unreadCount(Long userId) {
-        NotificationExample notificationExample = new NotificationExample();
-        notificationExample.createCriteria()
-                .andReceiverEqualTo(userId)
-                .andStatusEqualTo(NotificationStatusEnum.UNREAD.getStatus());
-        return notificationMapper.countByExample(notificationExample);
-    }
-
-    public NotificationDTO read(Long id, User user) {
+    public NotificationDTO read(Long id, Tourist user) {
         Notification notification = notificationMapper.selectByPrimaryKey(id);
         if (notification == null) {
             throw new CustomizeException(CustomizeErrorCode.NOTIFICATION_NOT_FOUND);
         }
-        if (!Objects.equals(notification.getReceiver(), user.getId())) {
+        if (!Objects.equals(notification.getReceiver(), user.getUser_id())) {
             throw new CustomizeException(CustomizeErrorCode.READ_NOTIFICATION_FAIL);
         }
 

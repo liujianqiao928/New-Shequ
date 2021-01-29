@@ -5,14 +5,17 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.mapper.QuestionExtMapper;
+import life.majiang.community.mapper.TouristMapper;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.Question;
+import life.majiang.community.model.Tourist;
 import life.majiang.community.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -25,7 +28,8 @@ public class QuestionCache {
     private QuestionExtMapper questionExtMapper;
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private TouristMapper touristMapper;
     private static Cache<String, List<QuestionDTO>> cacheQuestions = CacheBuilder.newBuilder()
             .maximumSize(100)
             .expireAfterWrite(10, TimeUnit.MINUTES)
@@ -34,16 +38,18 @@ public class QuestionCache {
 
     public List<QuestionDTO> getStickies() {
         List<QuestionDTO> stickies;
-        try {
+
+                try {
             stickies = cacheQuestions.get("sticky", () -> {
                 List<Question> questions = questionExtMapper.selectSticky();
                 if (questions != null && questions.size() != 0) {
                     List<QuestionDTO> questionDTOS = new ArrayList<>();
                     for (Question question : questions) {
-                        User user = userMapper.selectByPrimaryKey(question.getCreator());
+                        Tourist byId = touristMapper.findById(question.getCreator());
+//                        User user = userMapper.selectByPrimaryKey(question.getCreator());
                         QuestionDTO questionDTO = new QuestionDTO();
                         BeanUtils.copyProperties(question, questionDTO);
-                        questionDTO.setUser(user);
+                        questionDTO.setTourist(byId);
                         questionDTO.setDescription("");
                         questionDTOS.add(questionDTO);
                     }

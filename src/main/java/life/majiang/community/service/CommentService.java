@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.ref.PhantomReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,8 @@ public class CommentService {
 
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private TouristMapper touristMapper;
     @Autowired
     private CommentExtMapper commentExtMapper;
 
@@ -44,7 +46,7 @@ public class CommentService {
     private NotificationMapper notificationMapper;
 
     @Transactional
-    public void insert(Comment comment, User commentator) {
+    public void insert(Comment comment, Tourist commentator) {
         if (comment.getParentId() == null || comment.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
         }
@@ -73,7 +75,7 @@ public class CommentService {
             commentExtMapper.incCommentCount(parentComment);
 
             // 创建通知
-            createNotify(comment, dbComment.getCommentator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT, question.getId());
+            createNotify(comment, dbComment.getCommentator(), commentator.getUser_name(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT, question.getId());
         } else {
             // 回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -86,7 +88,7 @@ public class CommentService {
             questionExtMapper.incCommentCount(question);
 
             // 创建通知
-            createNotify(comment, question.getCreator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION, question.getId());
+            createNotify(comment, question.getCreator(), commentator.getUser_name(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION, question.getId());
         }
     }
 
@@ -124,18 +126,18 @@ public class CommentService {
 
 
         // 获取评论人并转换为 Map
-        UserExample userExample = new UserExample();
-        userExample.createCriteria()
-                .andIdIn(userIds);
-        List<User> users = userMapper.selectByExample(userExample);
-        Map<Long, User> userMap = users.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));
+        TouristExample touristExample = new TouristExample();
+        touristExample.createCriteria().andUserIdIn(userIds);
+//                .andIdIn(userIds);
+        List<Tourist> users = touristMapper.selectByExample(touristExample);
+        Map<Long, Tourist> userMap = users.stream().collect(Collectors.toMap(tourist -> tourist.getUser_id(), tourist -> tourist));
 
 
         // 转换 comment 为 commentDTO
         List<CommentDTO> commentDTOS = comments.stream().map(comment -> {
             CommentDTO commentDTO = new CommentDTO();
             BeanUtils.copyProperties(comment, commentDTO);
-            commentDTO.setUser(userMap.get(comment.getCommentator()));
+            commentDTO.setTourist(userMap.get(comment.getCommentator()));
             return commentDTO;
         }).collect(Collectors.toList());
 

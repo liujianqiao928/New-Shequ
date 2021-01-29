@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>码匠社区</title>
+    <title>乔问</title>
     <head th:insert="~{import :: head}"></head>
 </head>
 <script type="application/javascript">
@@ -18,7 +18,7 @@
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 发现</h3>
+            <h3><span clas s="glyphicon glyphicon-list" aria-hidden="true"></span> 发现</h3>
             <ul class="nav nav-tabs">
                 <li role="presentation" th:class="${sort == 'new' || sort == '' ? 'active':''}">
                     <a th:href="@{/(sort='new')}">最新</a>
@@ -41,7 +41,7 @@
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-rounded"
-                             th:src="${question.user.avatarUrl}">
+                             th:src="${question.tourist.user_photo}">
                     </a>
                 </div>
                 <div class="media-body">
@@ -95,7 +95,7 @@
                 <a th:each="tag : ${tags}" th:href="@{/(page=1,search=${search},tag=${tag},sort=${sort})}"
                    th:text="${tag}" class="community-tag"></a>
             </div>
-            <div th:insert="~{side :: side}"></div>
+
         </div>
     </div>
 </div>

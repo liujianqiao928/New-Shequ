@@ -10,9 +10,9 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">码匠社区</span>
+                    <span class="sr-only">乔匠</span>
                 </button>
-                <a class="navbar-brand" href="/">码匠社区</a>
+                <a class="navbar-brand" href="/">乔问</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -38,26 +38,107 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li th:if="${session.user != null}">
+                    <li th:if="${session.user != null || session.tourist!=null }">
                         <a href="/publish">提问</a>
                     </li>
                     <li><a href="/profile/replies">通知 <span class="badge" th:text="${session.unreadCount}"></span></a>
                     </li>
-                    <li class="dropdown" th:if="${session.user != null}">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">
-                            <span th:text="${session.user.getName()}"></span>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/profile/questions">我的问题</a></li>
-                            <li><a href="/logout">退出登录</a></li>
-                        </ul>
-                    </li>
-                    <li th:if="${session.user == null}">
-                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='2859958f9f059979ed3a',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('redirectUri')},scope='user',state=1)}">登录</a>
-                    </li>
+<!--                    <li class="dropdown" th:if="${session.user == null || session.tourist == null}">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >-->
+<!--                            &lt;!&ndash;<span th:text="${session.tourist.getUserName()}|| 我"></span>&ndash;&gt;-->
+<!--                    <li th:if="${session.tourist == null || session.user == null}">-->
+<!--                        <span >登录</span>-->
+<!--                        <span class="caret"></span>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li><a href="#">GitHub登录</a></li>-->
+<!--                            <li><a href="/tologin">普通用户登录</a></li>-->
+<!--                            <li><a href="/tores">普通用户注册</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
 
+
+<!--                    </li>-->
+<!--                    <li class="dropdown" th:if="${session.user != null || session.tourist != null }">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
+<!--                           aria-expanded="false">-->
+<!--                    <li th:if="${session.tourist!= null}">-->
+<!--                        <span th:text="${session.tourist.getUser_name()}"></span>-->
+<!--                        <span class="caret"></span></a>-->
+<!--                        <ul class="dropdown-menu">-->
+
+<!--                            <li><a href="/pre/questions">我的问题</a></li>-->
+<!--                            <li><a href="/logout">退出登录</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li th:if="${session.user!= null}">-->
+<!--                        <span th:text="${session.user.getName()}"></span>-->
+<!--                        <span class="caret"></span></a>-->
+<!--                        <ul class="dropdown-menu">-->
+
+<!--                            <li><a href="/pre/questions">我的问题</a></li>-->
+<!--                            <li><a href="/logout">退出登录</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+                <li class="dropdown" th:if="${session.user != null || session.tourist != null}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+                    <!--<span th:text="${session.tourist.getUserName()}|| 我"></span>-->
+                    <li th:if="${session.tourist!= null}">
+                        <span th:text="${session.tourist.getUser_name()}"></span>
+                        <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/profile/questions">我的问题</a></li>
+                    <li><a href="/logout">退出登录</a></li>
+                </ul>
+                </li>
+                <li th:if="${session.user!= null}">
+                    <span th:text="${session.user.getName()}"></span>
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/profile/questions">我的问题</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+                <!--<span class="caret"></span></a>-->
+                <!--<ul class="dropdown-menu">-->
+                <!--<li><a href="#">消息中心</a></li>-->
+                <!--<li><a href="/pre/questions">我的问题</a></li>-->
+                <!--<li><a href="/logout">退出登录</a></li>-->
+                <!--</ul>-->
+                </li>
+                <li th:if="${session.user == null && session.tourist == null}"><a  href="/tores">注册</a></li>
+
+                <li th:if="${session.user == null && session.tourist == null}"><a href="tologin">登录</a></li>
+<!--                    <li th:if="${session.user == null}">-->
+<!--                        <a th:href="@{https://github.com/login/oauth/authorize(client_id='2859958f9f059979ed3a',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('redirectUri')},scope='user',state=1)}">登录</a>-->
+<!--                    </li>-->
+<!--                    <li class="dropdown" th:if="${session.user != null || session.tourist != null}">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >-->
+<!--                            &lt;!&ndash;<span th:text="${session.tourist.getUserName()}|| 我"></span>&ndash;&gt;-->
+<!--                    <li th:if="${session.tourist!= null}">-->
+<!--                        <span th:text="${session.tourist.getUser_name()}"></span>-->
+<!--                        <span class="caret"></span></a>-->
+<!--                        <ul class="dropdown-menu">-->
+
+<!--                            <li><a href="/pre/questions">我的问题</a></li>-->
+<!--                            <li><a href="/logout">退出登录</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li th:if="${session.user!= null}">-->
+<!--                        <span th:text="${session.user.getName()}"></span>-->
+<!--                        <span class="caret"></span></a>-->
+<!--                        <ul class="dropdown-menu">-->
+
+<!--                            <li><a href="/pre/questions">我的问题</a></li>-->
+<!--                            <li><a href="/logout">退出登录</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    &lt;!&ndash;<span class="caret"></span></a>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;-->
+<!--                    &lt;!&ndash;<li><a href="#">消息中心</a></li>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<li><a href="/pre/questions">我的问题</a></li>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<li><a href="/logout">退出登录</a></li>&ndash;&gt;-->
+<!--                    &lt;!&ndash;</ul>&ndash;&gt;-->
+<!--                    </li>-->
                 </ul>
             </div>
         </div>

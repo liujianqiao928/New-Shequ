@@ -18,6 +18,14 @@ import java.util.PriorityQueue;
 public class HotTagCache {
     private List<String> hots = new ArrayList<>();
 
+    public List<String> getHots() {
+        return hots;
+    }
+
+    public void setHots(List<String> hots) {
+        this.hots = hots;
+    }
+
     public void updateTags(Map<String, Integer> tags) {
         int max = 10;
         PriorityQueue<HotTagDTO> priorityQueue = new PriorityQueue<>(max);

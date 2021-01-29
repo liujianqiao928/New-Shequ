@@ -3,6 +3,7 @@ package life.majiang.community.controller;
 import life.majiang.community.cache.TagCache;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.model.Question;
+import life.majiang.community.model.Tourist;
 import life.majiang.community.model.User;
 import life.majiang.community.service.QuestionService;
 import org.apache.commons.lang3.StringUtils;
@@ -83,7 +84,9 @@ public class PublishController {
         }
 
         User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
+        Tourist tourist = (Tourist) request.getSession().getAttribute("tourist");
+        System.out.println(tourist);
+        if ( tourist == null) {
             model.addAttribute("error", "用户未登录");
             return "publish";
         }
@@ -92,7 +95,7 @@ public class PublishController {
         question.setTitle(title);
         question.setDescription(description);
         question.setTag(tag);
-        question.setCreator(user.getId());
+        question.setCreator(tourist.getUser_id());
         question.setId(id);
         questionService.createOrUpdate(question);
         return "redirect:/";

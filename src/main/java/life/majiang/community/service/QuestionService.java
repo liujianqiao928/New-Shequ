@@ -9,9 +9,11 @@ import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.exception.CustomizeException;
 import life.majiang.community.mapper.QuestionExtMapper;
 import life.majiang.community.mapper.QuestionMapper;
+import life.majiang.community.mapper.TouristMapper;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.Question;
 import life.majiang.community.model.QuestionExample;
+import life.majiang.community.model.Tourist;
 import life.majiang.community.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -38,6 +40,8 @@ public class QuestionService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private TouristMapper touristMapper;
 
     @Autowired
     private QuestionCache questionCache;
@@ -102,11 +106,11 @@ public class QuestionService {
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         for (Question question : questions) {
-            User user = userMapper.selectByPrimaryKey(question.getCreator());
+            Tourist user = touristMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setDescription("");
-            questionDTO.setUser(user);
+            questionDTO.setTourist(user);
             questionDTOList.add(questionDTO);
         }
         List<QuestionDTO> stickies = questionCache.getStickies();
@@ -151,10 +155,10 @@ public class QuestionService {
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         for (Question question : questions) {
-            User user = userMapper.selectByPrimaryKey(question.getCreator());
+            Tourist user = touristMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
-            questionDTO.setUser(user);
+            questionDTO.setTourist(user);
             questionDTOList.add(questionDTO);
         }
 
@@ -169,8 +173,8 @@ public class QuestionService {
         }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
-        User user = userMapper.selectByPrimaryKey(question.getCreator());
-        questionDTO.setUser(user);
+        Tourist user = touristMapper.findById(question.getCreator());
+        questionDTO.setTourist(user);
         return questionDTO;
     }
 

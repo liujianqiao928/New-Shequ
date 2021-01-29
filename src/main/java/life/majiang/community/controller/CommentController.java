@@ -6,6 +6,7 @@ import life.majiang.community.dto.ResultDTO;
 import life.majiang.community.enums.CommentTypeEnum;
 import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.model.Comment;
+import life.majiang.community.model.Tourist;
 import life.majiang.community.model.User;
 import life.majiang.community.service.CommentService;
 import org.apache.commons.lang3.StringUtils;
@@ -29,8 +30,9 @@ public class CommentController {
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
                        HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
+//        User user = (User) request.getSession().getAttribute("u");
+        Tourist tourist=(Tourist)request.getSession().getAttribute("tourist");
+        if (tourist == null) {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
 
@@ -44,11 +46,11 @@ public class CommentController {
         comment.setType(commentCreateDTO.getType());
         comment.setGmtModified(System.currentTimeMillis());
         comment.setGmtCreate(System.currentTimeMillis());
-        comment.setCommentator(user.getId());
+        comment.setCommentator(tourist.getUser_id());
         comment.setLikeCount(0L);
-        commentService.insert(comment, user);
+        commentService.insert(comment,tourist);
         return ResultDTO.okOf();
-    }
+}
 
     @ResponseBody
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
