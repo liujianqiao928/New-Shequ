@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登陆</title>
+
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+
+    <!--&lt;!&ndash; 可选的 Bootstrap 主题文件（一般不用引入） &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css">
+    <link rel="stylesheet" href="/css/login.css">
+
+</head>
+
+<body>
+<!--<div th:insert="~{navgation :: copy}"></div>-->
+<div id="login_box">
+    <h2>找回密码 </h2>
+    <div id="form">
+        <form action="/los" method="post">
+            <div class="alert alert-danger  " th:text="${err}" th:if="${err != null}"></div>
+        <div id="input_box">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input class="in" type="text"  name="usercode"  placeholder="用户名">
+        </div>
+            <div id="input_box">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input class="in" type="text"  name="email"  placeholder="注册时候的邮箱">
+        </div>
+        <div id="input_box">
+            <i class="fa fa-key" aria-hidden="true"></i>
+            <input class="in" type="password" name="password"  placeholder="新密码">
+        </div>
+    </div>
+
+    <button type="submit">确定</button><br>
+    </form>
+    <div id="Sign">
+        <!--<a href="/">返回首页</a>-->
+             <a href="/tologin">返回登陆</a>
+    </div>
+</div>
+</body>
+<script></script>
+</html>

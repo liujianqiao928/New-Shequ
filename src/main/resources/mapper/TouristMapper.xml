@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="life.majiang.community.mapper.TouristMapper">
-  <resultMap id="BaseResultMap" type="life.majiang.community.model.Tourist">
+<mapper namespace="xyz.liujianqiao.community.mapper.TouristMapper">
+  <resultMap id="BaseResultMap" type="xyz.liujianqiao.community.model.Tourist">
     <result column="user_id" jdbcType="BIGINT" property="user_id" />
     <result column="user_code" jdbcType="VARCHAR" property="user_code" />
     <result column="user_name" jdbcType="VARCHAR" property="user_name" />
@@ -73,19 +73,19 @@
   <sql id="Base_Column_List">
     user_id, user_code, user_name, user_email, user_password, user_state, user_photo,exp
   </sql>
-  <select id="selectByExample" parameterType="life.majiang.community.model.TouristExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="xyz.liujianqiao.community.model.TouristExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tourist
 
   </select>
-  <delete id="deleteByExample" parameterType="life.majiang.community.model.TouristExample">
+  <delete id="deleteByExample" parameterType="xyz.liujianqiao.community.model.TouristExample">
     delete from tourist
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="life.majiang.community.model.Tourist">
+  <insert id="insert" parameterType="xyz.liujianqiao.community.model.Tourist">
     insert into tourist (user_id, user_code, user_name,
       user_email, user_password, user_state,
       user_photo,exp)
@@ -93,7 +93,7 @@
       #{user_email,jdbcType=VARCHAR}, #{user_password,jdbcType=VARCHAR}, #{user_state,jdbcType=INTEGER},
       #{user_photo,jdbcType=VARCHAR},#{exp,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="life.majiang.community.model.Tourist">
+  <insert id="insertSelective" parameterType="xyz.liujianqiao.community.model.Tourist">
     insert into tourist
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
@@ -138,7 +138,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="life.majiang.community.model.TouristExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="xyz.liujianqiao.community.model.TouristExample" resultType="java.lang.Long">
     select count(*) from tourist
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -186,14 +186,20 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <select id="find" parameterType="String" resultMap="BaseResultMap" resultType="life.majiang.community.model.Tourist">
+  <select id="find" parameterType="String" resultMap="BaseResultMap" resultType="xyz.liujianqiao.community.model.Tourist">
     select
     *
     from tourist
     where user_code = #{usercode}
     and user_password =#{password}
 
-  </select><select id="findById"  resultMap="BaseResultMap" resultType="life.majiang.community.model.Tourist">
+  </select><select id="findById"  resultMap="BaseResultMap" resultType="xyz.liujianqiao.community.model.Tourist">
    select * from tourist where user_id=#{id}
   </select>
+  <update id="update"  parameterType="String" >
+    update tourist
+    set
+    user_password = #{password}
+  where user_email=#{email} and user_code = #{usercode}
+  </update>
 </mapper>

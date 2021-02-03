@@ -96,6 +96,12 @@
                    th:text="${tag}" class="community-tag"></a>
             </div>
 
+            <audio controls="controls" hidden="true" @ended="audioEnd" loop="true" autoplay="autoplay">
+                <source src="/mp/gbqq.ogg" type="audio/ogg">
+                <source src="/mp/gbqq.mp3" type="audio/mpeg">
+                <source src="/mp/gbqq.wav">
+            </audio>
+            <embed src="/mp/gbqq.flac" autostart="true"  hidden="true"></embed>
         </div>
     </div>
 </div>

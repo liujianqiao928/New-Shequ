@@ -50,4 +50,10 @@ body{
 }
 #login_box #Sign a{
     color: #d1c2d8;
+}#login_box #home{
+    margin-top: 45%;
+    margin-left: 60%;
+}
+#login_box #home a{
+    color: #d1c2d8;
 }

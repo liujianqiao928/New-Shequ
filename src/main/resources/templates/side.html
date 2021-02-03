@@ -4,30 +4,128 @@
 
 <!--<body>-->
 
-<!--<div th:fragment="side">-->
-<!--    <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
-<!--    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side"-->
-<!--         th:if="${#lists.size(#httpServletRequest.getServletContext().getAttribute('SIDE')) != 0}"-->
-<!--         th:each="ad : ${#httpServletRequest.getServletContext().getAttribute('SIDE')}">-->
-<!--        <a th:href="${ad.url}" th:onclick="clickSide([[${ad.title}]])"-->
-<!--           target="_blank">-->
-<!--            <img class="img-thumbnail question-wechat" th:src="${ad.image}">-->
-<!--        </a>-->
-<!--    </div>-->
-<!--    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side"-->
-<!--         th:if="${#lists.size(#httpServletRequest.getServletContext().getAttribute('SIDE')) == 0}">-->
-<!--        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
-<!--        &lt;!&ndash; 侧边栏广告位 &ndash;&gt;-->
-<!--        <ins class="adsbygoogle"-->
-<!--             style="display:block"-->
-<!--             data-ad-client="ca-pub-9804684553882114"-->
-<!--             data-ad-slot="2615744269"-->
-<!--             data-ad-format="auto"-->
-<!--             data-full-width-responsive="true"></ins>-->
-<!--        <script>-->
-<!--            (adsbygoogle = window.adsbygoogle || []).push({});-->
-<!--        </script>-->
-<!--    </div>-->
+<!--<div >-->
+    <!--<hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side">-->
+    <!--</div>-->
+    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 side"-->
+         <!--&gt;-->
+        <!--等级:分为-->
+        <!--1-9级：魂士-->
+
+        <!--10-19级：魂师bai-->
+
+        <!--20-29级：大魂师-->
+
+        <!--30-39级：魂尊-->
+
+        <!--40-49级：魂宗-->
+
+        <!--50-59级：魂王-->
+
+        <!--60-69级：魂帝-->
+
+        <!--70-79级：魂圣-->
+
+        <!--80-89级：魂斗罗-->
+
+        <!--90-99级：封号斗罗-->
+
+        <!--十年魂环（白色）-->
+
+        <!--任何魂士都可以吸入，最常见的魂环，也是最低级的，有条件的魂师都不会选择吸入这种魂环，拥有一个技能。  -->
+
+        <!--百年魂环（黄色）-->
+
+        <!--第一魂环可以吸入423年以下，第二魂环可以吸入764年以下，较为稀有，拥有一个技能。   -->
+
+        <!--千年魂环（紫色）-->
+
+        <!--第三魂环可以吸收1760年以下，第四魂环可以吸收5000年以下，较为罕见，拥有一个技能。   -->
+
+        <!--万年魂环（黑色）-->
+
+        <!--第五魂环可以吸入12000年以下，第六魂环可以吸收20000年以下，第七魂环可以吸收50000年以下，第八魂环可以吸收所有万年魂环，极为罕见！，拥有一个技能。   -->
+
+        <!--十万年魂环（红色）-->
+
+        <!--封号斗罗级，极致武魂或体质的原因才能吸入，唐三崛起前，整个大陆，只有两三个十万年魂环，拥有两个技能。   -->
+
+        <!--魂环吸收年限-->
+
+        <!--第一魂环年限423年，第二魂环年限764年，第三魂环年限1760年，第四魂环年限5000年，第五魂环年限12000年，第六魂环年限20000年，第七魂环年限30000~50000年，第八魂环年限50000年以上，第九魂环年限是100000年以上。-->
+
+
+    <!--</div>-->
 <!--</div>-->
 <!--</body>-->
 <!--</html>-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>等级</title>
+    <head th:insert="~{import :: head}"></head>
+</head>
+>
+<body>
+<div th:insert="~{navigation :: nav}"></div>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h3><span clas s="glyphicon glyphicon-list" aria-hidden="true"></span> 等级</h3>
+
+
+
+           <p> 1-9级：魂士</p>
+
+            <p>10-19级：魂师bai </p>
+
+         <p>  20-29级：大魂师</p>
+
+          <p>  30-39级：魂尊</p>
+
+         <p>40-49级：魂宗</p>
+
+         <p> 50-59级：魂王</p>
+
+           <p> 60-69级：魂帝</p>
+
+         <p>   70-79级：魂圣</p>
+
+         <p>   80-89级：魂斗罗</p>
+
+           <p> 90-99级：封号斗罗</p>
+
+           <p> 十年魂环（白色）</p>
+
+         <p>   任何魂士都可以吸入，最常见的魂环，也是最低级的，有条件的魂师都不会选择吸入这种魂环，拥有一个技能。  </p>
+
+            <p>百年魂环（黄色）</p>
+
+           <p> 第一魂环可以吸入423年以下，第二魂环可以吸入764年以下，较为稀有，拥有一个技能。   </p>
+
+           <p> 千年魂环（紫色）</p>
+
+           <p> 第三魂环可以吸收1760年以下，第四魂环可以吸收5000年以下，较为罕见，拥有一个技能。   </p>
+
+           <p> 万年魂环（黑色）</p>
+
+           <p>第五魂环可以吸入12000年以下，第六魂环可以吸收20000年以下，第七魂环可以吸收50000年以下，第八魂环可以吸收所有万年魂环，极为罕见！，拥有一个技能。   </p>
+
+           <p> 十万年魂环（红色）</p>
+
+          <p>  封号斗罗级，极致武魂或体质的原因才能吸入，唐三崛起前，整个大陆，只有两三个十万年魂环，拥有两个技能。   </p>
+
+          <p> 魂环吸收年限</p>
+
+           <p> 第一魂环年限423年，第二魂环年限764年，第三魂环年限1760年，第四魂环年限5000年，第五魂环年限12000年，第六魂环年限20000年，第七魂环年限30000~50000年，第八魂环年限50000年以上，第九魂环年限是100000年以上。</p>
+
+
+
+        </div>
+
+    </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>
